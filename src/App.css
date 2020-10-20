@@ -3,7 +3,6 @@
     display: flex;
     justify-content: space-around;
     padding: 5px;
-    background-color: rgba(153,204,255,0.25);
     background-image: linear-gradient(to right, #c0b283,#f4f4f4);
     height: 35px;
     align-items: center;

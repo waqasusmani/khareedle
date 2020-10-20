@@ -6,7 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { FormControl, NativeSelect, Options } from '@material-ui/core';
+import { FormControl, NativeSelect } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,23 +23,42 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   dropDown: {
-      color:"white"
+      color:"grey"
   },
   appBar: {
-      backgroundColor: "#373737",
-      height: "60px"
+      backgroundColor: "rgba(153,204,255,0.1)",
+      height: "60px",
+      color:"grey"
   }
 }));
+
+const cardStyles = makeStyles({
+  root: {
+    width:"17.5%",
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 
 export default function Main() {
     const classes = useStyles();
+    const cardClasses = cardStyles();
     return (
         <div>
         <div className="top-bar">
             <img id="logo" src={require('./logo.png')} alt="khareed le"/>
             <select defaultValue="0">
-                <option value = "0" className="provinces">Select province</option>
+                <option value = "Pakistan" className="provinces">Pakistan</option>
                 <option value = "Sindh" className="provinces">Sindh</option>
                 <option value = "Punjab" className="provinces">Punjab</option>
                 <option value = "Baluchistan" className="provinces">Baluchistan</option>
@@ -46,7 +69,7 @@ export default function Main() {
                 <button id="search-button">Submit</button>
             </div>
         </div>
-        {/* <div className={classes.root}>
+        <div className={classes.root}>
         <AppBar position="static" className={classes.appBar} >
           <Toolbar>
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -73,7 +96,31 @@ export default function Main() {
             <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
-      </div> */}
       </div>
-    )
+    
+    <Card className={cardClasses.root}>
+      <CardContent>
+        <Typography className={cardClasses.title} color="textSecondary" gutterBottom>
+          Word of the Day
+        </Typography>
+        <Typography variant="h5" component="h2">
+          benevolent
+        </Typography>
+        <Typography className={cardClasses.pos} color="textSecondary">
+          adjective
+        </Typography>
+        <Typography variant="body2" component="p">
+          well meaning and kindly.
+          <br />
+          {'"a benevolent smile"'}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
+    </div>
+  );
+    
+    
 }
