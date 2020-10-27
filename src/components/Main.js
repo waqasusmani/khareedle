@@ -11,6 +11,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {cars} from "../data/Cars";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,10 +102,10 @@ export default function Main() {
     <Card className={cardClasses.root}>
       <CardContent>
         <Typography className={cardClasses.title} color="textSecondary" gutterBottom>
-          Word of the Day
+          <img src={require('cars.c1.items[0].imgsrc')} alt="city" width='200px' height='150px'></img>
         </Typography>
         <Typography variant="h5" component="h2">
-          benevolent
+        
         </Typography>
         <Typography className={cardClasses.pos} color="textSecondary">
           adjective
