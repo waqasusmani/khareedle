@@ -61,14 +61,16 @@ export default function Main() {
   const classes = useStyles();
   const cardClasses = cardStyles();
   const cars = require("../data/cars");
-  const [display, setDisplay] = React.useState(false)
-  var valueItems = {};
+  const [display, setDisplay] = React.useState(false);
+  const [value, setValue] = React.useState({});
+  // var valueItems = {};
   
   var showDetails = (val)=>{
     console.log(val)
-    valueItems = {...val};
+    setValue(val)
+    // valueItems = {...val};
     setDisplay(!display);
-    console.log(valueItems)
+    // console.log(valueItems)
   }
   
   return (
@@ -159,8 +161,8 @@ export default function Main() {
       })}
       </div>:
       <div>
-        {console.log(valueItems)}
-      <ProductDetails val={valueItems}/>
+        {console.log(value)}
+      <ProductDetails val={value}/>
     </div>
     }      
     </div>
