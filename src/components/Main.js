@@ -10,8 +10,9 @@ import { FormControl, NativeSelect } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { BrowserRouter as Router, Link } from "react-router-dom";
-// import cars from "../data/Cars";
+// import { BrowserRouter as Router, Link } from "react-router-dom";
+import NumberFormat from 'react-number-format';
+import { ProductDetails } from "./ProductDetails";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,12 +32,17 @@ const useStyles = makeStyles((theme) => ({
     height: "60px",
     color: "grey",
   },
+  homeItems: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-evenly'
+  }
 }));
 
 const cardStyles = makeStyles({
   root: {
     width: "17.5%",
-    margin: '30px'
+    margin: "30px",
   },
   bullet: {
     display: "inline-block",
@@ -55,7 +61,16 @@ export default function Main() {
   const classes = useStyles();
   const cardClasses = cardStyles();
   const cars = require("../data/cars");
-  var cityVar = cars.cars().c1.items[0].imgsrc;
+  const [display, setDisplay] = React.useState(false)
+  var valueItems = {};
+  
+  var showDetails = (val)=>{
+    console.log(val)
+    valueItems = {...val};
+    setDisplay(!display);
+    console.log(valueItems)
+  }
+  
   return (
     <div>
       <div className="top-bar">
@@ -81,7 +96,6 @@ export default function Main() {
           <input id="search-input" placeholder="Enter item to search"></input>
           <button id="search-button">Submit</button>
         </div>
-
       </div>
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
@@ -120,23 +134,34 @@ export default function Main() {
           </Toolbar>
         </AppBar>
       </div>
-
+      {display == false?
+      <div className = {classes.homeItems}>
       {Object.values(cars.cars()).map((value, index) => {
-          return value.items.map((val, ind) => {
-            return (
-              <Card className={cardClasses.root}>
-                <CardContent>
-                  <img src={require('../data/images/' + val.imgsrc)} alt={val.imgsrc}
-              width="200px"
-              height="150px"/>
-                  <Typography key={ind}>{val.id}</Typography>
-            </CardContent>
-            <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
+        return value.items.map((val, ind) => {
+          return (
+            <Card className={cardClasses.root} key={ind}>
+              <CardContent>
+                <img
+                  src={require("../data/images/" + val.imgsrc)}
+                  alt={val.imgsrc}
+                  width="200px"
+                  height="150px"
+                />
+                <Typography  variant= 'h5'><NumberFormat value={val.price} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} /> </Typography>
+                <Typography>{val.name}</Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" onClick = {()=>{showDetails(val)}}>Learn More</Button>
+              </CardActions>
             </Card>
-          )});
-        })}
+          );
+        });
+      })}
+      </div>:
+      <div>
+        {console.log(valueItems)}
+      <ProductDetails val={valueItems}/>
     </div>
-  );
-}
+    }      
+    </div>
+  )}
