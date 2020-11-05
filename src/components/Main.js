@@ -128,11 +128,11 @@ export default function Main() {
                 </NativeSelect>
               </FormControl>
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={()=>setDisplay(false)}>Home</Button>
           </Toolbar>
         </AppBar>
       </div>
-      {display == false?
+      {display === false?
       <div className = {classes.homeItems}>
       {Object.values(cars.cars()).map((value, index) => {
         return value.items.map((val, ind) => {
