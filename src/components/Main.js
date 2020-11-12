@@ -10,9 +10,9 @@ import { FormControl, NativeSelect } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-// import { BrowserRouter as Router, Link } from "react-router-dom";
 import NumberFormat from 'react-number-format';
 import { ProductDetails } from "./ProductDetails";
+import Ad from './Ad'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,14 +61,13 @@ export default function Main() {
   const classes = useStyles();
   const cardClasses = cardStyles();
   const cars = require("../data/cars");
-  const [display, setDisplay] = React.useState(false);
+  const [display, setDisplay] = React.useState(0);
   
   var showDetails = (val)=>{
     console.log(val)
     valueItems = val;
-    setDisplay(!display);
+    setDisplay(1);
   }
-  
   return (
     <div>
       <div className="top-bar">
@@ -128,11 +127,12 @@ export default function Main() {
                 </NativeSelect>
               </FormControl>
             </Typography>
-            <Button color="inherit" onClick={()=>setDisplay(false)}>Home</Button>
+            <Button color="inherit" onClick={()=>setDisplay(0)}>Home</Button>
+            <Button color="inherit" onClick={()=> setDisplay(2)}>Post Your Ad</Button>
           </Toolbar>
         </AppBar>
       </div>
-      {display === false?
+      {display === 0?
       <div className = {classes.homeItems}>
       {Object.values(cars.cars()).map((value, index) => {
         return value.items.map((val, ind) => {
@@ -155,11 +155,14 @@ export default function Main() {
           );
         });
       })}
-      </div>:
+      </div>: display === 1?
       <div>
         {console.log(valueItems)}
       <ProductDetails val={valueItems}/>
+    </div> :
+    <div>
+      <Ad/>
     </div>
-    }      
+    }
     </div>
   )}
