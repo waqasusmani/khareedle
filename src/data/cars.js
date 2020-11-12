@@ -99,7 +99,10 @@ const cars = () => {
   };
 };
 
+const data = () => [];
+
 // export const computers = {"HP":["corei3","corei5","corei7"],"Dell":["corei3","corei5","corei7"],"Apple":["corei3","corei5","corei7"]}
 // export const mobiles = {"Nokia":["3.1","6.1","3310"],"Samsung":["galaxy7","galaxy8","galaxy9"],"AppleiPhone":["6","7","X"]}
 
 exports.cars = cars;
+exports.data= data;
