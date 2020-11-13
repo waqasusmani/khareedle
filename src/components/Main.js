@@ -10,9 +10,10 @@ import { FormControl, NativeSelect } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import { ProductDetails } from "./ProductDetails";
-import Ad from './Ad'
+import Ad from "./Ad";
+import { data } from "../data/Data";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
     color: "grey",
   },
   homeItems: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly'
-  }
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+  },
 }));
 
 const cardStyles = makeStyles({
@@ -62,12 +63,12 @@ export default function Main() {
   const cardClasses = cardStyles();
   const cars = require("../data/cars");
   const [display, setDisplay] = React.useState(0);
-  
-  var showDetails = (val)=>{
-    console.log(val)
+
+  var showDetails = (val) => {
+    console.log(val);
     valueItems = val;
     setDisplay(1);
-  }
+  };
   return (
     <div>
       <div className="top-bar">
@@ -127,42 +128,60 @@ export default function Main() {
                 </NativeSelect>
               </FormControl>
             </Typography>
-            <Button color="inherit" onClick={()=>setDisplay(0)}>Home</Button>
-            <Button color="inherit" onClick={()=> setDisplay(2)}>Post Your Ad</Button>
+            <Button color="inherit" onClick={() => setDisplay(0)}>
+              Home
+            </Button>
+            <Button color="inherit" onClick={() => setDisplay(2)}>
+              Post Your Ad
+            </Button>
           </Toolbar>
         </AppBar>
       </div>
-      {display === 0?
-      <div className = {classes.homeItems}>
-      {Object.values(cars.cars()).map((value, index) => {
-        return value.items.map((val, ind) => {
-          return (
-            <Card className={cardClasses.root} key={ind}>
-              <CardContent>
-                <img
-                  src={require("../data/images/" + val.imgsrc)}
-                  alt={val.imgsrc}
-                  width="200px"
-                  height="150px"
-                />
-                <Typography  variant= 'h5'><NumberFormat value={val.price} displayType={'text'} thousandSeparator={true} prefix={'Rs. '} /> </Typography>
-                <Typography>{val.name}</Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" onClick = {()=>{showDetails(val)}}>Learn More</Button>
-              </CardActions>
-            </Card>
-          );
-        });
-      })}
-      </div>: display === 1?
-      <div>
-        {console.log(valueItems)}
-      <ProductDetails val={valueItems}/>
-    </div> :
-    <div>
-      <Ad/>
+      {display === 0 ? (
+        <div className={classes.homeItems}>
+          {data.map((value, index) => {
+            return (
+              <Card className={cardClasses.root} key={index}>
+                <CardContent>
+                  <img
+                    src={value.imgsrc}
+                    alt={value.imgsrc}
+                    width="200px"
+                    height="150px"
+                  />
+                  <Typography variant="h5">
+                    <NumberFormat
+                      value={value.price}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"Rs. "}
+                    />{" "}
+                  </Typography>
+                  <Typography>{value.name}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    onClick={() => {
+                      showDetails(value);
+                    }}
+                  >
+                    Learn More
+                  </Button>
+                </CardActions>
+              </Card>
+            );
+          })}
+        </div>
+      ) : display === 1 ? (
+        <div>
+          <ProductDetails val={valueItems} />
+        </div>
+      ) : (
+        <div>
+          <Ad />
+        </div>
+      )}
     </div>
-    }
-    </div>
-  )}
+  );
+}

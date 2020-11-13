@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { storage } from "../firebase/firebase";
-import {data} from "../data/Data";
+import { data } from "../data/Data";
 
 function Ad() {
-
   const [formData, setFormData] = useState({});
   const [imageAsFile, setImageAsFile] = useState("");
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
@@ -12,7 +11,6 @@ function Ad() {
     setImageAsFile((imageAsFile) => image);
   };
   const handleFireBaseUpload = (e) => {
-    console.log(formData.make+"::"+formData.name+"::"+formData.price);
     e.preventDefault();
     console.log("Start of upload");
     if (imageAsFile === "") {
@@ -36,46 +34,72 @@ function Ad() {
           .getDownloadURL();
         console.log(fireBaseUrl);
         setImageAsUrl((prevObject) => ({ ...prevObject, imgUrl: fireBaseUrl }));
-        formData.imgSrc=fireBaseUrl
-        addObject()        
+        formData.imgSrc = fireBaseUrl;
+        addObject();
       }
-      
     );
   };
-  
-  function addObject(){
-      console.log(formData.make+"::"+formData.name+"::"+formData.price);
-      var dataToEnter={make: formData.make,name: formData.name,price: formData.price,details:formData.details,location:formData.location,sellerName:formData.sellerName,imgSrc:formData.imgSrc};
-      data.push(dataToEnter)
-      console.log(data)
+
+  function addObject() {
+    var dataToEnter = {
+      make: formData.make,
+      name: formData.name,
+      price: formData.price,
+      productDetail: formData.productDetail,
+      imgsrc: formData.imgSrc,
+      location: formData.location,
+      sellerName: formData.sellerName,
+    };
+    data.push(dataToEnter);
+    console.log(data);
   }
 
   return (
-    <div>
+    <div id="ad-div">
+      <h1> Post your ad here: </h1>
       <form encType="multipart/form-data" onSubmit={handleFireBaseUpload}>
         <label>Enter Make: </label>
-        <input type="text" onChange={e => formData.make=e.target.value}/>
+        <br></br>
+        <input type="text" onChange={(e) => (formData.make = e.target.value)} />
         <br></br>
         <label>Enter Name: </label>
-        <input type="text"  onChange={e => formData.name=e.target.value}/>
+        <br></br>
+        <input type="text" onChange={(e) => (formData.name = e.target.value)} />
         <br></br>
         <label>Enter Price: </label>
-        <input type="text"  onChange={e => formData.price=e.target.value}/>
+        <br></br>
+        <input
+          type="text"
+          onChange={(e) => (formData.price = e.target.value)}
+        />
         <br></br>
         <label>Enter Details: </label>
-        <input type="text"  onChange={e => formData.details=e.target.value}/>
+        <br></br>
+        <input
+          type="text"
+          onChange={(e) => (formData.productDetail = e.target.value)}
+        />
         <br></br>
         <label>Enter Location: </label>
-        <input type="text"  onChange={e => formData.location=e.target.value}/>
+        <br></br>
+        <input
+          type="text"
+          onChange={(e) => (formData.location = e.target.value)}
+        />
         <br></br>
         <label>Enter Seller Name: </label>
-        <input type="text"  onChange={e => formData.sellerName=e.target.value}/>
+        <br></br>
+        <input
+          type="text"
+          onChange={(e) => (formData.sellerName = e.target.value)}
+        />
         <br></br>
         <label>Upload image here: </label>
+        <br></br>
         <input type="file" onChange={handleImageAsFile}></input>
-        <button>upload to firebase</button>
+        <br></br>
+        <button>Submit</button>
       </form>
-      <img src={imageAsUrl.imgUrl} alt="uploadedImage" />
     </div>
   );
 }

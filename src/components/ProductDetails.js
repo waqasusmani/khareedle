@@ -39,7 +39,7 @@ export const ProductDetails = (val) => {
           </div>
           <img
             id="product-image"
-            src={require("../data/images/" + val.val.imgsrc)}
+            src={val.val.imgsrc}
             alt={val.val.imgsrc}
           />
           <div >

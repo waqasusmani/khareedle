@@ -38,3 +38,9 @@
     margin-top: 10%;
     padding-left: 5%;
 }
+
+#ad-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
