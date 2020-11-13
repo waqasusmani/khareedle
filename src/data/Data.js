@@ -1,1 +1,1 @@
-export const data = ["Adnan","Waqas"];
+export const data = [];
