@@ -2,14 +2,16 @@ import firebase from 'firebase/app';
 import 'firebase/storage';
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBHLBzDGAWVNHWEt3bKyZuw1HMKHQmFsuo",
-    authDomain: "aw-khareedle.firebaseapp.com",
-    databaseURL: "https://aw-khareedle.firebaseio.com",
-    projectId: "aw-khareedle",
-    storageBucket: "aw-khareedle.appspot.com",
-    messagingSenderId: "147638024847",
-    appId: "1:147638024847:web:d2286e2aa68e45d01a8efa"
+    apiKey: "AIzaSyBoswWx4cxTMtbjjFfFsB9UEi7LUwgiQs8",
+    authDomain: "khareedle-saylani-assignment.firebaseapp.com",
+    databaseURL: "https://khareedle-saylani-assignment.firebaseio.com",
+    projectId: "khareedle-saylani-assignment",
+    storageBucket: "khareedle-saylani-assignment.appspot.com",
+    messagingSenderId: "802702152509",
+    appId: "1:802702152509:web:08c919ff280912bad46b54",
+    measurementId: "G-T6PP3Y7RW9"
   };
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 

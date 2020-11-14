@@ -11,6 +11,9 @@ function Ad() {
     setImageAsFile((imageAsFile) => image);
   };
   const handleFireBaseUpload = (e) => {
+    document.getElementById("loading").style.display = "block";
+    var buttonsArray = Object.values(document.getElementsByClassName("all-buttons"));
+    buttonsArray.map((val,ind)=>val.disabled=true);
     e.preventDefault();
     console.log("Start of upload");
     if (imageAsFile === "") {
@@ -28,7 +31,8 @@ function Ad() {
         console.log(err);
       },
       async () => {
-        var fireBaseUrl = await storage
+        if (imageAsFile){
+          var fireBaseUrl = await storage
           .ref("images")
           .child(imageAsFile.name)
           .getDownloadURL();
@@ -36,8 +40,12 @@ function Ad() {
         setImageAsUrl((prevObject) => ({ ...prevObject, imgUrl: fireBaseUrl }));
         formData.imgSrc = fireBaseUrl;
         addObject();
+        }
+        buttonsArray.map((val,ind)=>val.disabled=false);
+        document.getElementById("loading").style.display = "none";
       }
     );
+    
   };
 
   function addObject() {
@@ -98,7 +106,7 @@ function Ad() {
         <br></br>
         <input type="file" onChange={handleImageAsFile}></input>
         <br></br>
-        <button>Submit</button>
+        <button className="all-buttons">Submit</button>
       </form>
     </div>
   );

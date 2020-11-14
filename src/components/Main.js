@@ -71,7 +71,9 @@ export default function Main() {
   };
   return (
     <div>
+      <img id="loading" src={require("./Loading.png")} alt="loading"/>
       <div className="top-bar">
+        
         <img id="logo" src={require("./logo.png")} alt="khareed le" />
         <select defaultValue="0">
           <option value="Pakistan" className="provinces">
@@ -128,10 +130,10 @@ export default function Main() {
                 </NativeSelect>
               </FormControl>
             </Typography>
-            <Button color="inherit" onClick={() => setDisplay(0)}>
+            <Button color="inherit" onClick={() => setDisplay(0)} className="all-buttons">
               Home
             </Button>
-            <Button color="inherit" onClick={() => setDisplay(2)}>
+            <Button color="inherit" onClick={() => setDisplay(2)} className="all-buttons">
               Post Your Ad
             </Button>
           </Toolbar>
@@ -165,6 +167,7 @@ export default function Main() {
                     onClick={() => {
                       showDetails(value);
                     }}
+                    className="all-buttons"
                   >
                     Learn More
                   </Button>
